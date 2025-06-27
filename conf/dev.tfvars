@@ -1,0 +1,1 @@
+keypair_name = "ec2_key_pair"
