@@ -4,27 +4,27 @@ variable "keypair_name" {
 
 }
 
-variable "access_key" {
+# variable "access_key" {
 
-  default = "access_key"
-}
+#   default = "access_key"
+# }
 
-variable "secret_key" {
+# variable "secret_key" {
 
-  default = "secret_key"
-}
+#   default = "secret_key"
+# }
 
-variable "AWS_ACCESS_KEY_ID" {
+# variable "AWS_ACCESS_KEY_ID" {
 
-  description = "Your AWS Access Key ID"
-  type        = string
-}
+#   description = "Your AWS Access Key ID"
+#   type        = string
+# }
 
-variable "AWS_SECRET_ACCESS_KEY" {
+# variable "AWS_SECRET_ACCESS_KEY" {
 
-  description = "Your AWS Secret Access Key ID"
-  type        = string
-}
+#   description = "Your AWS Secret Access Key ID"
+#   type        = string
+# }
 
 variable "vpc_cidr" {
   type        = string
