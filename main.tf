@@ -8,11 +8,11 @@
 
 # }
 
-module "keypair" {
-  source       = "./modules/keypair"
-  keypair_name = var.keypair_name
+# module "keypair" {
+#   source       = "./modules/keypair"
+#   keypair_name = var.keypair_name
 
-}
+# }
 
 # module "security_group" {
 #   source = "./modules/security_group"
