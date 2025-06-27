@@ -12,8 +12,6 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    env:
-      ENVIRONMENT: ${{ github.ref_name.split('-')[0] }}
       
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -25,13 +23,16 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
           terraform_version: '1.5.6'
-          
+
     - name: Determine environment from tag
       id: tag_parse
       run: |
+        # strip off the "refs/tags/" prefix
         TAG_NAME=${GITHUB_REF#refs/tags/}
+        # take the characters before the first hyphen
         ENV=${TAG_NAME%%-*}
         echo "ENVIRONMENT=$ENV" >> $GITHUB_ENV
+        
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
