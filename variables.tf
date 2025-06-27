@@ -1,7 +1,7 @@
 variable "keypair_name" {
-  type = string
+  type        = string
   description = "Name of the EC2 Key Pair to be created"
-  
+
 }
 
 variable "access_key" {
@@ -21,7 +21,7 @@ variable "AWS_ACCESS_KEY_ID" {
 }
 
 variable "AWS_SECRET_ACCESS_KEY" {
-  
+
   description = "Your AWS Secret Access Key ID"
   type        = string
 }
@@ -77,11 +77,11 @@ variable "ag_cpu_target_value" {
 }
 
 variable "image_id" {
-    type=string
-    default = "ami-007855ac798b5175e"
+  type    = string
+  default = "ami-007855ac798b5175e"
 }
 
 variable "instance_type" {
-    type=string
-    default = "t2.micro"
+  type    = string
+  default = "t2.micro"
 }
