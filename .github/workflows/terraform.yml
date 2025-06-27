@@ -12,7 +12,6 @@ jobs:
     name: Terraform Plan (${ { github.ref_name } })
     runs-on: ubuntu-latest
     outputs:
-      plan-path: ${{ steps.plan.outputs.plan-file }}
       env-name: ${{ steps.tag_parse.outputs.environment }}
     steps:
       - name: Checkout
@@ -42,13 +41,17 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        id: plan
         run: |
           terraform plan \
             -input=false \
             -var-file="conf/${{ env.ENVIRONMENT }}.tfvars" \
             -out=tfplan
-          echo "::set-output name=plan-file::tfplan"
+
+      - name: Upload Plan Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: tfplan
+          path: tfplan
 
   apply:
     name: Terraform Apply (${ { needs.plan.outputs.env-name } })
@@ -74,9 +77,10 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Copy Plan from “plan” job
-        run: |
-          cp ${{ needs.plan.outputs.plan-path }} tfplan
+      - name: Download Plan Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: tfplan
 
       - name: Terraform Apply
         run: terraform apply -input=false tfplan
